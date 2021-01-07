@@ -43,4 +43,101 @@ Software requirements for the project are as follows:
 
 ## File Structure
   
-  To be continued..
+.  
+├── Intermediate Code Generation  
+│   ├── parser.y  
+│   ├── run.sh  
+│   ├── scanner.l  
+│   ├── tests  
+├── Lexical Analysis  
+│   ├── Lexical Analysis.pdf  
+│   ├── run.sh  
+│   ├── scanner.l  
+│   └── tests    
+├── Parsing  
+│   ├── parser.y  
+│   ├── Parsing.pdf  
+│   ├── run.sh  
+│   ├── scanner.l  
+│   ├── tests   
+├── README.md  
+└── Semantic Analysis  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── parser.y  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── run.sh  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── scanner.l  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── Semantic Analysis.pdf  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── tests  
+
+8 directories, 47 files  
+
+Clearly, from the above structure, it can be seen that each phase is contained in an individual directory. So, if need be, one can see the working of each individual phase by going in the respective directory.
+Each directory will contain the following:
+
+- A **bash script** named run.sh.
+- A directory names **tests** with suitable test cases.
+- **Lex** or/and **Yacc** code as required.
+- **Report** regarding the working of the phase.
+
+## Execution Steps
+
+To execute intermediate code generation, run the bash script placed in the directory. The bash script looks like this:
+
+
+``` bash
+#!/bin/bash
+
+YELLOW='\033[1;33m'
+NOCOLOR='\033[0m'
+
+function run() {
+	flex scanner.l && yacc -d parser.y && gcc y.tab.c lex.yy.c -w
+	local total_testcases="$1"
+	echo "Running: $total_testcases"
+	local start=1
+	while [ $start -le $total_testcases ]
+	do
+		printf "\n\n"
+		for i in {1..35}
+		do
+			echo -ne "="
+		done
+		echo -ne "  ${YELLOW}Running TestCase $start${NOCOLOR}  "
+		for i in {1..35}
+		do
+			echo -ne "="
+		done
+		printf "\n"
+		local filename="tests/test"$start".c"
+		./a.out $filename
+		((start++))
+	done
+}
+
+number_of_files=`ls -l ./tests/ | egrep -c '^-'`
+run $number_of_files
+```
+
+The workflow is explained as under:
+- Compile the script using Yacc tool
+ 	```bash
+  $ yacc -d c_parser.y
+  ```
+- Compile the flex script using Flex tool
+ 	```bash
+  $ flex c_lexer.l
+  ```
+- After compiling the lex file, a lex.yy.c file is generated. Also, y.tab.c and y.tab.h files are generated after compiling the yacc script.
+
+- The two files, lex.yy.c and y.tab.c are compiled together
+  ```bash
+ 	$ gcc -o compiler lex.yy.c y.tab.h y.tab.c -ll	
+  ```
+  
+## Usage Examples
+
+## Developer Information
+**Name**: Ankit Kumar Singh  
+**USN**: 1RV18IS007  
+**Institute**: R. V. College of Engineering  
+**Instructor**: Prof B. K. Srinivas  
+
