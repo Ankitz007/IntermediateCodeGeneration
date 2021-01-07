@@ -135,6 +135,15 @@ The workflow is explained as under:
   
 ## Usage Examples
 
+Below are the screenshots of the execution of code.  
+
+![ScreenShot 1](https://github.com/Ankitz007/IntermediateCodeGeneration/blob/main/img/1.png)
+  
+![ScreenShot 2](https://github.com/Ankitz007/IntermediateCodeGeneration/blob/main/img/2.png)
+  
+![ScreenShot 3](https://github.com/Ankitz007/IntermediateCodeGeneration/blob/main/img/3.png)
+
+
 ## Developer Information
 **Name**: Ankit Kumar Singh  
 **USN**: 1RV18IS007  
